@@ -9,6 +9,7 @@
 - useRef hook
 - firebase setup
 - deploying out app to production
-- Create Signup User account
-- Implement Sign In user API
-- Create Redux store
+- Created Signup User account
+- Implemented Sign In user API
+- Created Redux store
+- Implemented Signout

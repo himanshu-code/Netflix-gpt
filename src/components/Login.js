@@ -1,14 +1,20 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
+import { useDispatch } from "react-redux";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignUpPage, setIsSignUpPage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -33,7 +39,27 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/54369884?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+
           // ...
         })
         .catch((error) => {
@@ -52,6 +78,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -76,12 +103,6 @@ const Login = () => {
           <h1 className="font-bold text-3xl py-4">
             {isSignUpPage ? "Sign Up" : "Sign In"}
           </h1>
-          <input
-            ref={email}
-            type="text"
-            placeholder="Email Address"
-            className="p-4 my-2 w-full bg-gray-800"
-          />
           {isSignUpPage && (
             <input
               ref={name}
@@ -90,6 +111,12 @@ const Login = () => {
               className="p-4 my-2 w-full bg-gray-800"
             />
           )}
+          <input
+            ref={email}
+            type="text"
+            placeholder="Email Address"
+            className="p-4 my-2 w-full bg-gray-800"
+          />
 
           <input
             ref={password}
