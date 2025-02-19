@@ -8,10 +8,9 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
+import { AVATAR_ICON } from "../utils/constatants";
 const Login = () => {
-  const navigate = useNavigate();
   const [isSignUpPage, setIsSignUpPage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
@@ -41,7 +40,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/54369884?v=4",
+            photoURL: { AVATAR_ICON },
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -53,8 +52,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -78,7 +75,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -98,7 +94,7 @@ const Login = () => {
           alt="bg image"
         ></img>
       </div>
-      <div className="w-4/12 absolute p-12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-black bg-opacity-25">
+      <div className="w-4/12 absolute p-12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-black opacity-25">
         <form onSubmit={(e) => e.preventDefault()}>
           <h1 className="font-bold text-3xl py-4">
             {isSignUpPage ? "Sign Up" : "Sign In"}

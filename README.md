@@ -13,3 +13,11 @@
 - Implemented Sign In user API
 - Created Redux store
 - Implemented Signout
+- Update Profile
+- Registered TMDB API
+- Fetch Data from TMDB API
+- Custom hook for Now Playing Movies
+- Create Movies Slice
+- Update Store with movies Data
+- Fetch Data for trailer video
+- Embedded the youtube video and make it autoplay
