@@ -21,3 +21,9 @@
 - Update Store with movies Data
 - Fetch Data for trailer video
 - Embedded the youtube video and make it autoplay
+- Build movies list
+- Build Movies List
+- TMDB image CDN url
+- GPT Search Page
+- GPT Searh Bar
+- Multilanguage Feature

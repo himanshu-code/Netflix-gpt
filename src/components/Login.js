@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { addUser } from "../utils/userSlice";
-import { AVATAR_ICON } from "../utils/constatants";
+import { AVATAR_ICON, BG_IMG_URL } from "../utils/constants";
 const Login = () => {
   const [isSignUpPage, setIsSignUpPage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -88,13 +88,9 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className="w-full"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/f268d374-734d-474f-ad13-af5ba87ef9fc/web/IN-en-20250210-TRIFECTA-perspective_92338d5d-6ccd-4b1a-8536-eb2b0240a55e_small.jpg"
-          alt="bg image"
-        ></img>
+        <img className="w-full" src={BG_IMG_URL} alt="bg "></img>
       </div>
-      <div className="w-4/12 absolute p-12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-black opacity-25">
+      <div className="w-4/12 absolute p-12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-black opacity-90">
         <form onSubmit={(e) => e.preventDefault()}>
           <h1 className="font-bold text-3xl py-4">
             {isSignUpPage ? "Sign Up" : "Sign In"}
