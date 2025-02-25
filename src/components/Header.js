@@ -57,17 +57,19 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black to-transparent w-full flex justify-between items-center z-10">
+    <div className="absolute px-2 md:px-8 py-2 bg-gradient-to-b from-black to-transparent w-full flex justify-center sm:justify-between items-center z-10 flex-col sm:flex-row">
       <img className="w-40" src={LOGO} alt="netflix logo"></img>
       {user && (
-        <div className="flex items-center">
+        <div className="flex p-2 justify-between item-center">
           {isGptSearchView && (
             <select
               className="p-2 m-2 bg-black bg-greay-900 text-white"
               onChange={handleLanguageSelection}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
-                <option value={lang.value}>{lang.label}</option>
+                <option value={lang.value} key={lang.value}>
+                  {lang.label}
+                </option>
               ))}
             </select>
           )}
@@ -77,7 +79,11 @@ const Header = () => {
           >
             {isGptSearchView ? "Homepage" : "GPT Search"}
           </button>
-          <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
+          <img
+            className="w-12 h-12 hidden md:inline-block"
+            src={user?.photoURL}
+            alt="user icon"
+          />
           <button
             className="cursor-pointer p-2 m-2 text-white bg-red-600 rounded-md"
             onClick={handleSignOut}

@@ -27,3 +27,7 @@
 - GPT Search Page
 - GPT Searh Bar
 - Multilanguage Feature
+- GPT Search Api
+- Fetched Movie Sugestions
+- Reused Movie Slice
+- Memoization
