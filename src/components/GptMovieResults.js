@@ -12,11 +12,15 @@ const GptMovieResults = () => {
   return (
     <div className="text-white p-4 m-4 bg-black opacity-90">
       {searchResults.map((movieName, index) => (
-        <MovieList
-          key={movieName}
-          title={movieName}
-          movies={gptMovies[index]}
-        />
+        <>
+          {gptMovies[index] && (
+            <MovieList
+              key={movieName}
+              title={movieName}
+              movies={gptMovies[index]}
+            />
+          )}
+        </>
       ))}
     </div>
   );
