@@ -19,7 +19,7 @@ const useGetMovieDetails = (movieId) => {
     if (index == -1) {
       getmovieDetails();
     }
-  }, []);
+  }, [movieId]);
 };
 
 export default useGetMovieDetails;

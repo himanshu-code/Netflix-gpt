@@ -27,6 +27,7 @@ const Body = () => {
           <MoviePage />
         </Suspense>
       ),
+      key: window.location.pathname,
     },
   ]);
 

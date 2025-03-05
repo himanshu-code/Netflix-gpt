@@ -19,15 +19,19 @@ const Login = () => {
   const name = useRef(null);
   const toggleSignUp = () => {
     setIsSignUpPage(!isSignUpPage);
+    setErrorMessage("");
   };
   const handleButtonClick = () => {
-    const message = checkValidateData(
-      email.current.value,
-      password.current.value
-    );
-    setErrorMessage(message);
-    if (message) {
-      return;
+    if (isSignUpPage) {
+      const message = checkValidateData(
+        email.current.value,
+        password.current.value
+      );
+      setErrorMessage(message);
+
+      if (message) {
+        return;
+      }
     }
     if (isSignUpPage) {
       createUserWithEmailAndPassword(
@@ -80,7 +84,7 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorMessage);
+          setErrorMessage(errorMessage);
         });
     }
   };
