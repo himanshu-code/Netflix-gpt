@@ -4,7 +4,7 @@ import lang from "../utils/languageConstants";
 import { client } from "../utils/openai";
 import { API_OPTIONS } from "../utils/constants";
 import { addGPTMovieResult } from "../utils/gptSlice";
-const GptSearchBar = () => {
+const GptSearchBar = ({ onSearchClick }) => {
   const selectLanguage = useSelector((state) => state.lang.language);
   const searchText = useRef(null);
   const dispatch = useDispatch();
@@ -25,6 +25,7 @@ const GptSearchBar = () => {
         "Act as a Movie recommendation system and suggest some movies for the query " +
         searchText.current.value +
         ". only give me names of 5 movies, comma separated like the example result give ahead. Example Result: Gadar,Sholay,Don,Dhoom,Golmaal";
+      onSearchClick(true);
       const chatCompletion = await client.chat.completions.create({
         messages: [
           { role: "system", content: "" },
@@ -46,6 +47,7 @@ const GptSearchBar = () => {
       dispatch(
         addGPTMovieResult({ movieNames: gptMovies, movieResults: movies })
       );
+      onSearchClick(false);
     }
   };
   return (
