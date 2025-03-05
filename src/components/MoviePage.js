@@ -38,7 +38,7 @@ const MoviePage = () => {
               src={IMG_CON_URL + movieData.backdrop_path}
               alt="movie poster"
             />
-            <div className="">
+            <div className="pt-[30%] bg-black md:pt-0">
               <VideoTitle
                 title={movieData.original_title}
                 overview={movieData.overview}
